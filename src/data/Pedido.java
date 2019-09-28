@@ -12,10 +12,7 @@ public class Pedido implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	private int id;
-	private ArrayList<String> content;
-	//private Reader readerOld;
-	//private Reader readerNew;
-	
+	private ArrayList<String> content;	
 	
 	public Pedido() {
 		this.id = 0;

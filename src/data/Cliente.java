@@ -1,41 +1,52 @@
 package data;
 
-import java.io.Serializable;
+public class Cliente extends Usuario {
 
-public class Cliente implements Serializable {
-
+	
 	private static final long serialVersionUID = 1L;
-	private int id;
-	private String name;
-	private Pedido order;
+	private Pedido shoppingCart;
 		
 		
 	public Cliente() {
 		this.id = 0;
 		this.name = "defaultName defaultSurname";
-		this.order = new Pedido();
+		this.username = "default";
+		this.password = "123";
+		this.shoppingCart = new Pedido();
 	}
 	
-	public Cliente (int id, String name) {
+	public Cliente (int id, String name, String username, String password) {
 		this.id = id;
 		this.name = name;
+		this.username = username;
+		this.password = password;
 	}
 	
-	public Cliente (int id, String name, Pedido order) {
+	public Cliente (int id, String name, String username, String password, Pedido order) {
 		this.id = id;
 		this.name = name;
-		this.order = order;
+		this.username = username;
+		this.password = password;
+		this.shoppingCart = order;
 	}	
+	
+	
 	
 	public void assignOrder(Pedido newOrder) {
 		
 		newOrder.setId(this.getId());
 		
-		if(this.order==null)
-			this.setOrder(newOrder);
+		if(this.shoppingCart==null)
+			this.setShoppingCart(newOrder);
 		else 
 			System.out.println("No se puedo crear. El cliente ya posee un pedido en curso!");
 	}
+	
+	public void deleteOrder () {
+		this.shoppingCart = null;
+	}
+		
+	
 	
 	public int getId() {
 		return id;
@@ -53,16 +64,16 @@ public class Cliente implements Serializable {
 		this.name = name;
 	}
 
-	public Pedido getOrder() {
-		return order;
+	public Pedido getShoppingCart() {
+		return shoppingCart;
 	}
 
-	public void setOrder(Pedido order) {
-		this.order = order;
+	public void setShoppingCart(Pedido order) {
+		this.shoppingCart = order;
 	}
 
 	@Override
 	public String toString() {
-		return "Id cliente: " + id + "\nNombre: " + name + "\nPedido: " + order;
+		return "Id cliente: " + id + "\nNombre: " + name + "\nUsuario: " + username + "\nPedido: " + shoppingCart;
 	}
 }

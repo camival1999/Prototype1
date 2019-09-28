@@ -14,9 +14,22 @@ public class MainMenu implements Serializable{
 		starter = new Engine();
 		starter.run();
 		
-		int selection=0;
-			boolean exit = false;			
-			Reader reader = new Reader();
+			//int selection=0;
+			//boolean exit = false;			
+			//Reader reader = new Reader();
+			
+		LoginMenu lg = new LoginMenu(starter);	
+		lg.loginRun(starter);
+		
+		adminMenu();
+		
+		
+	}
+
+	public static void adminMenu() {
+		int selection = 0;
+		boolean exit = false;
+		Reader reader = new Reader();
 		
 		System.out.println("     ****** Bienvenido a la tienda VirtUNAL *****\n");
 		
@@ -35,7 +48,7 @@ public class MainMenu implements Serializable{
 					System.out.println("			Entrada no válida");
 			
 				if(selection==1)
-					starter.getDatabase().print();
+					starter.getDatabase().printClients();
 				else if(selection==2)
 					starter.registro();
 				else if(selection==3)
@@ -52,6 +65,12 @@ public class MainMenu implements Serializable{
 		}	
 		starter.end();
 		System.out.println("			Hasta pronto!");
+		
+		
 	}
+	
 
+	public static Engine getEngine() {
+		return starter;
+	}
 }
