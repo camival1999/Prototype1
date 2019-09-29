@@ -6,6 +6,7 @@ import businessLogic.Reader;
 public class LoginMenu {
 		private boolean admin = false;
 		private boolean client = false;
+		private boolean exit = false;
 	
 	
 	public LoginMenu(Engine e) {
@@ -23,11 +24,22 @@ public class LoginMenu {
 		
 			if(selection == 1)
 				e.login();
-			if(selection ==2) 
-				e.registro();		
-			
-		
-		
+			else if(selection ==2) 
+				e.registro();
+			else if(selection ==3) {
+				exit = true;
+			}
+		this.admin = e.getAdminState();
+		this.client = e.getClientState();
 	}
 
+	public boolean getExitSate() {
+		return exit;
+	}
+	public boolean getAdminState() {
+		return admin;
+	}
+	public boolean getClientState() {
+		return client;
+	}
 }

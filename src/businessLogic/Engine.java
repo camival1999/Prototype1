@@ -52,7 +52,9 @@ public class Engine implements Serializable{
 					for(Admin a : database.getAdminBase()) {
 						if(a.getUsername().equals(username)) {
 							if(a.getPassword().equals(password)) {
-								admin = true;
+								System.out.println("Se ha encontrado una coincidencia!");
+								this.admin = true;
+								this.client = false;
 							}
 						}
 						counter++;
@@ -65,7 +67,8 @@ public class Engine implements Serializable{
 						for(Cliente c : database.getClientBase()) {
 							if(c.getUsername().equals(username)) {
 								if(c.getPassword().equals(password)) {
-									client = true;
+									this.client = true;
+									this.admin = false;
 								}else
 									System.out.println("Contraseña incorrecta");
 							}
@@ -76,6 +79,8 @@ public class Engine implements Serializable{
 					
 				}else
 					System.out.println("Entrada inválida");
+					client = false;
+					admin = false;
 					
 		}
 			
@@ -213,12 +218,10 @@ public class Engine implements Serializable{
 
 		
 		public boolean getAdminState() {
-			return admin;
+			return this.admin;
 		}
-
-		
 		
 		public boolean getClientState() {
-			return client;
+			return this.client;
 		}
 }
