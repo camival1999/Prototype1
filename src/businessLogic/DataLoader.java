@@ -14,8 +14,8 @@ import data.Admin;
 import data.Cliente;
 
 public class DataLoader {
-	public static File clients = new File("data/ClientesDB.dat");
-	public static File admins = new File("data/AdminsDB.dat");
+	public static File clients = new File("ClientesDB.dat");
+	public static File admins = new File("AdminsDB.dat");
 	
 	public static File getClientsFile() {
 		return clients;

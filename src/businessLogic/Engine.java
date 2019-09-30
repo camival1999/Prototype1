@@ -14,7 +14,7 @@ import data.Pedido;
 public class Engine implements Serializable{
 
 	private static final long serialVersionUID = 1L;
-		private static  DB database;
+		private static DB database;
 		private boolean adminLogin = false;
 		private boolean clientLogin = false;
 		private boolean contains = false;
@@ -29,9 +29,9 @@ public class Engine implements Serializable{
 		}
 		
 		public void end()  {
-			File clients = new File("data/ClientesDB.dat");
+			File clients = new File("ClientesDB.dat");
 			businessLogic.DataLoader.saveClients(clients,Engine.database);
-			File admins = new File("data/AdminsDB.dat");
+			File admins = new File("AdminsDB.dat");
 			businessLogic.DataLoader.saveAdmins(admins,Engine.database);
 		}
 		
@@ -51,24 +51,25 @@ public class Engine implements Serializable{
 				password = rdLogin.nextLine();
 			
 				if(selection == 1) {
+					System.out.println("Entro a 1");
 					int counter = 0;
-					for(Admin a : database.getAdminBase()) {
+					for(Admin a : Engine.database.getAdminBase()) {
 						if(a.getUsername().equals(username)) {
 							if(a.getPassword().equals(password)) {
-								//System.out.println("Se ha encontrado una coincidencia!");
+								System.out.println("Se ha encontrado una coincidencia!");
 								this.adminLogin = true;
 								this.clientLogin = false;
 								this.admin = a;
 							}
 						}
 						counter++;
-						if(counter == database.getAdminBase().size() && adminLogin==false)
+						if(counter == Engine.database.getAdminBase().size() && adminLogin==false)
 							System.out.println("Usuario o contraseña incorrectos. ");
 					}
 							
 				}else if(selection ==2) {
 					int counter = 0;
-						for(Cliente c : database.getClientBase()) {
+						for(Cliente c : Engine.database.getClientBase()) {
 							if(c.getUsername().equals(username)) {
 								if(c.getPassword().equals(password)) {
 									this.clientLogin = true;
@@ -80,7 +81,7 @@ public class Engine implements Serializable{
 							}else
 							counter++;
 							
-								if(counter == database.getAdminBase().size())
+								if(counter == Engine.database.getAdminBase().size())
 									System.out.println("Usuario no encontrado.");
 						}
 					
@@ -116,12 +117,12 @@ public class Engine implements Serializable{
 							String password = rdRegister.next();
 							
 						Admin admin = new Admin(id,name,username,password);
-						try {
-							Engine.database.saveAdmin(admin);
+						//try {
+						Engine.database.saveAdmin(admin);
 							System.out.println("Administrador guardado exitosamente!");
-						}catch(RuntimeException e) {
-							System.out.println("No se puedo guardar el usuario, intente de nuevo");
-						}
+						//}catch(RuntimeException e) {
+						//	System.out.println("No se puedo guardar el usuario, intente de nuevo");
+						//}
 					}catch(InputMismatchException e) {
 						System.out.println("Identificación no válida");
 					}
@@ -158,10 +159,6 @@ public class Engine implements Serializable{
 			Reader rdOrder = new Reader();
 				Pedido order = new Pedido();
 					String orderStr="";
-					//Reader rdInt = new Reader();
-					
-			//System.out.println("Introduzca el ID del cliente: ");			
-				//Integer id = Integer.parseInt(rdInt.next());
 					
 			System.out.println("Introduzca el pedido en el formato *Item Cantidad*. Si solo es una unidad basta con poner solo *Item*. Escriba *fin* para terminar la toma del pedido");		
 				orderStr = rdOrder.nextLowercase();
@@ -170,7 +167,7 @@ public class Engine implements Serializable{
 				order.addContent(orderStr);
 					orderStr = rdOrder.nextLowercase();
 			}		
-			database.updateClient(this.client, order);
+			Engine.database.updateClient(this.client, order);
 		}
 	
 		public void eliminar() {
@@ -207,7 +204,7 @@ public class Engine implements Serializable{
 						temp.get(index).deleteOrder();
 						System.out.println("Pedido eliminado exitosamente!");
 					}
-				Engine.database.setClientBase(temp);
+					Engine.database.setClientBase(temp);
 			}else
 				System.out.println("Entrada no válida. ID incorrecto o el cliente no existe");
 		}		
@@ -258,7 +255,7 @@ public class Engine implements Serializable{
 		    	long elapsedTime = stopTime - startTime;
 		    		
 		    			System.out.println(elapsedTime + " ms");
-		    			System.out.println("Cantidad de datos almacenados: " + database.getClientBase().size());
+		    			System.out.println("Cantidad de datos almacenados: " + Engine.database.getClientBase().size());
 			
 		}
 		
@@ -275,7 +272,7 @@ public class Engine implements Serializable{
 			long stopTime = System.currentTimeMillis();
 		    	long elapsedTime = stopTime - startTime;		    		
 		    			System.out.println(elapsedTime + " ms");
-		    			System.out.println("Cantidad de datos almacenados: " + database.getClientBase().size());
+		    			System.out.println("Cantidad de datos almacenados: " + Engine.database.getClientBase().size());
 			
 			
 		}
@@ -297,7 +294,7 @@ public class Engine implements Serializable{
 		    				System.out.println(elapsedTime + " ms");
 		    				System.out.println(elapsedTimeS + "s");
 		    				System.out.println(elapsedTimeM + "min");
-		    				System.out.println("Cantidad de datos almacenados: " + database.getClientBase().size());
+		    				System.out.println("Cantidad de datos almacenados: " + Engine.database.getClientBase().size());
 		}
 		
 		public void diezMillones() {
@@ -317,7 +314,7 @@ public class Engine implements Serializable{
     				System.out.println(elapsedTime + " ms");
     				System.out.println(elapsedTimeS + "s");
     				System.out.println(elapsedTimeM + "min");
-    				System.out.println("Cantidad de datos almacenados: " + database.getClientBase().size());
+    				System.out.println("Cantidad de datos almacenados: " + Engine.database.getClientBase().size());
 		}
 		
 		public void cienMillones() {
@@ -338,7 +335,7 @@ public class Engine implements Serializable{
     				System.out.println(elapsedTime + " ms");
     				System.out.println(elapsedTimeS + "s");
     				System.out.println(elapsedTimeM + "min");
-    				System.out.println("Cantidad de datos almacenados: " + database.getClientBase().size());
+    				System.out.println("Cantidad de datos almacenados: " + Engine.database.getClientBase().size());
 		}
 
 

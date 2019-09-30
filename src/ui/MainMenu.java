@@ -29,7 +29,10 @@ public class MainMenu implements Serializable{
 		while (!exit) {
 			lg.loginRun(shop);
 			exit = lg.getExitSate();
+		
 				if(!exit) {
+					System.out.println("admin " + shop.getAdminState());
+					System.out.println("cliente " + shop.getClientState());
 					if(shop.getAdminState())
 						adminMenu(shop);
 					else if(shop.getClientState())

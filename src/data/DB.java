@@ -19,21 +19,34 @@ public class DB implements Serializable {
 	
 	
 	public void saveAdmin(Admin a) {											//Guarda el admin en la base de datos	
-		int count = 0;
+		/*
+		int count = 1;
 		for(Admin ao : adminBase ) {
-					
-			if(ao.getId()==a.getId()|| ao.getUsername() == a.getUsername())
+			if(ao.getId()==a.getId()|| ao.getUsername() == a.getUsername()) {
+				System.out.println("de verdad no se guardó");
 				throw new RuntimeException();
+			}
 				
-			else if(count == adminBase.size())
+				
+			else if(count == adminBase.size()) {
 					adminBase.add(a);
-			else
-				count++;			
+					System.out.println("de verdad se guardó");
+			}else {
+				count++;
+				System.out.println("la cagaste prro");
+			}
 		}
+		*/
+		
+		if(!adminBase.contains(a))
+			adminBase.add(a);
+			else
+				throw new RuntimeException();
 	}
 	
 	public void saveClient(Cliente u) {											//Guarda el cliente en la base de datos	
-		int count = 0;
+		/*
+		int count = 1;
 		for(Cliente c : clientBase) {
 		
 			if(c.getId()==u.getId()|| c.getUsername() == u.getUsername())
@@ -44,6 +57,11 @@ public class DB implements Serializable {
 			else
 				count++;			
 		}
+		*/
+		if(!clientBase.contains(u))
+			clientBase.add(u);
+			else
+				throw new RuntimeException();
 	}
 	
 	public void updateClient(Cliente c, Pedido order) {							//actualiza la informacion del cliente en la base de datos
