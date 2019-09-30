@@ -8,36 +8,85 @@ import businessLogic.Reader;
 public class MainMenu implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
-	private static Engine starter;
+	private static Engine shop;
 	
-	public static void main(String[] args) throws InterruptedException{
-		
-		starter = new Engine();
-		starter.run();
+	public static void main(String[] args) throws InterruptedException{	
+		shop = new Engine();
+		LoginMenu lg = new LoginMenu(shop);
 		boolean exit = false;
 		
+		//pruebas de tiempo registrando clientes
+		/*
+		starter.diezMil();
+		starter.cienMil();
+		starter.millon();
+		starter.diezMillones();
+		starter.cienMillones();
+		*/
 		
-		LoginMenu lg = new LoginMenu(starter);
+		shop.run();
 		
 		while (!exit) {
-		lg.loginRun(starter);
-		exit = lg.getExitSate();
-										System.out.println(exit);
-										System.out.println("admin: " + lg.getAdminState() + " cliente: " + lg.getClientState());
-		if(starter.getAdminState())
-			adminMenu();
-		else if(starter.getClientState())
-			clientMenu();
-											else
-												System.out.println("la cagaste prro :v");
+			lg.loginRun(shop);
+			exit = lg.getExitSate();
+				if(!exit) {
+					if(shop.getAdminState())
+						adminMenu(shop);
+					else if(shop.getClientState())
+						clientMenu(shop);
+				}						
 		}
 		
-		starter.end();
+		shop.end();
 		System.out.println("			Hasta pronto!");
 		
 	}
 
-	public static void adminMenu() {
+	public static void adminMenu(Engine en) {
+		int selection = 0;
+		boolean exit = false;
+		Reader reader = new Reader();
+		
+		System.out.println("     ****** Bienvenido a la tienda VirtUNAL *****\n");
+		
+		while(!exit) {		
+			selection = 0;
+		
+			System.out.println("                   Menú principal\n            *--------------------------*");
+			System.out.println("Seleccione una opción:\n");
+			System.out.println("1.- Ver clientes                      2.- Ver administradores                  3.- Ver pedidos en curso");
+			System.out.println("4.- Eliminar clientes o pedidos 	  5.- Cerrar sesión");
+		
+			try{
+				selection = Integer.parseInt(reader.next());
+									
+				if(selection>5 || selection<1)
+					System.out.println("			Entrada no válida");
+			
+				if(selection==1)
+					shop.getDatabase().printClients();
+				else if(selection==2)
+					shop.getDatabase().printAdmins();
+				else if(selection==3) {
+					shop.getDatabase().printOrders();
+				}else if(selection==4)
+					shop.eliminar();
+				else if(selection==5) {
+					exit = true;
+					en.setAdminState(false);	
+				}
+			}catch(NumberFormatException e) {
+				System.out.println("			Entrada no válida");
+			}
+	
+		}	
+		shop.end();
+		System.out.println("			Se ha cerrado sesión");
+		
+		
+	}
+	
+	public static void clientMenu(Engine en) {
 		int selection = 0;
 		boolean exit = false;
 		Reader reader = new Reader();
@@ -49,50 +98,7 @@ public class MainMenu implements Serializable{
 		
 		System.out.println("                   Menú principal\n            *--------------------------*");
 		System.out.println("Seleccione una opción:\n");
-		System.out.println("1.- Ver clientes                  2.- Registrar nuevo cliente                  3.- Tomar pedido");
-		System.out.println("4.- Eliminar cliente/pedido       5.- Salir");
-		
-			try{
-				selection = Integer.parseInt(reader.next());
-									
-				if(selection>5 || selection<1)
-					System.out.println("			Entrada no válida");
-			
-				if(selection==1)
-					starter.getDatabase().printClients();
-				else if(selection==2)
-					starter.registro();
-				else if(selection==3)
-					starter.tomaPedido();
-				else if(selection==4)
-					starter.eliminar();
-				else if(selection==5)
-					exit = true;
-			
-			}catch(NumberFormatException e) {
-				System.out.println("			Entrada no válida");
-			}
-	
-		}	
-		starter.end();
-		System.out.println("			Hasta pronto!");
-		
-		
-	}
-	
-	public static void clientMenu() {
-		int selection = 0;
-		boolean exit = false;
-		Reader reader = new Reader();
-		
-		System.out.println("     ****** Bienvenido a la tienda VirtUNAL *****\n");
-		
-		while(!exit) {		
-		selection = 0;
-		
-		System.out.println("                   Menú principal\n            *--------------------------*");
-		System.out.println("Seleccione una opción:\n");
-		System.out.println("1.- Ver productos                  2.- Ver pedido en curso           3.- Cerrar sesión");
+		System.out.println("1.- Ver productos/Realizar pedido                  2.- Ver pedido en curso           3.- Cerrar sesión");
 	
 		
 			try{
@@ -102,24 +108,27 @@ public class MainMenu implements Serializable{
 					System.out.println("			Entrada no válida");
 			
 				if(selection==1)
-					starter.getDatabase().printClients();
+					shop.tomaPedido();
 				else if(selection==2)
-					starter.registro();
-				else if(selection==3)
+					System.out.println(shop.getClient().getShoppingCart());
+				else if(selection==3) {
 					exit = true;
-			
+					en.setClientState(false);
+				}
 			}catch(NumberFormatException e) {
 				System.out.println("			Entrada no válida");
 			}
 	
 		}	
-		starter.end();
-		System.out.println("			Hasta pronto!");
+		shop.end();
+		System.out.println("			Se ha cerrado sesión");
 		
 		
 	}
+	
+	
 	
 	public static Engine getEngine() {
-		return starter;
+		return shop;
 	}
 }

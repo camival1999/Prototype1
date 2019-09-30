@@ -4,15 +4,17 @@ import businessLogic.Engine;
 import businessLogic.Reader;
 
 public class LoginMenu {
-		private boolean admin = false;
-		private boolean client = false;
-		private boolean exit = false;
-	
+		private boolean admin;
+		private boolean client;
+		private boolean exit;
 	
 	public LoginMenu(Engine e) {
-		
-			
+		this.admin = false;
+		this.client = false;
+		this.exit = false;
 	}
+	
+	
 	
 	public void loginRun(Engine e) {
 		
@@ -36,10 +38,13 @@ public class LoginMenu {
 	public boolean getExitSate() {
 		return exit;
 	}
+	
 	public boolean getAdminState() {
 		return admin;
 	}
+	
 	public boolean getClientState() {
 		return client;
 	}
+		
 }

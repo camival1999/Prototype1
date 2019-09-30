@@ -6,35 +6,49 @@ import java.util.ArrayList;
 
 public class DB implements Serializable {
 	
-	
 	private static final long serialVersionUID = 1L;
 	
-	//private Hashtable<Integer, Cliente> clientBase;
 	private ArrayList<Cliente> clientBase;
 	private ArrayList<Admin> adminBase;
 	
 	public DB() {
-		//this.clientBase = new Hashtable<Integer, Cliente>();
 		this.clientBase = new ArrayList<Cliente>();
 		this.adminBase = new ArrayList<Admin>();
 	}
 	
+	
+	
 	public void saveAdmin(Admin a) {											//Guarda el admin en la base de datos	
-		if(!adminBase.contains(a))
-		adminBase.add(a);
-		else
-			throw new RuntimeException();
+		int count = 0;
+		for(Admin ao : adminBase ) {
+					
+			if(ao.getId()==a.getId()|| ao.getUsername() == a.getUsername())
+				throw new RuntimeException();
+				
+			else if(count == adminBase.size())
+					adminBase.add(a);
+			else
+				count++;			
+		}
 	}
 	
 	public void saveClient(Cliente u) {											//Guarda el cliente en la base de datos	
-		if(!clientBase.contains(u))
-		clientBase.add(u);
-		else
-			throw new RuntimeException();
+		int count = 0;
+		for(Cliente c : clientBase) {
+		
+			if(c.getId()==u.getId()|| c.getUsername() == u.getUsername())
+				throw new RuntimeException();
+				
+			else if(count == clientBase.size())
+				clientBase.add(u);
+			else
+				count++;			
+		}
 	}
 	
-	public void updateClient(Integer id, Pedido order) {						//actualiza la informacion del cliente en la base de datos
-		clientBase.get(id).assignOrder(order);
+	public void updateClient(Cliente c, Pedido order) {							//actualiza la informacion del cliente en la base de datos
+		int index = clientBase.indexOf(c);
+		clientBase.get(index).assignOrder(order);
 	}
 	
 	public void printAdmins() {													//Imprime los administradores registrados actuales
@@ -66,15 +80,18 @@ public class DB implements Serializable {
 	   System.out.println(builder.toString());
 		}
 	}
-	/*
-	public Hashtable<Integer, Cliente> getClientBase() {
-		return clientBase;
+	
+	public void printOrders() {
+		
+		for(Cliente c : clientBase) {
+			System.out.println("No. clientes: " + clientBase.size());
+			System.out.println(c.getShoppingCart());
+		}
+		
 	}
 	
-	public void setClientBase(Hashtable<Integer, Cliente> database) {
-		this.clientBase = database;
-	}
-	 */
+	
+	
 	public ArrayList<Cliente> getClientBase() {
 		return clientBase;
 	}
@@ -86,7 +103,6 @@ public class DB implements Serializable {
 	public ArrayList<Admin> getAdminBase() {
 		return adminBase;
 	}
-
 	
 	public void setAdminBase(ArrayList<Admin> adminBase) {
 		this.adminBase = adminBase;

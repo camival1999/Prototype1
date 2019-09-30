@@ -24,8 +24,9 @@ public class Pedido implements Serializable {
 		this.content= new ArrayList<String>();
 	}
 	
-		//Agregar elementos al pedido con un String en la forma "item cantidad".
-	public void addContent(String thing_qty) {
+	
+		
+	public void addContent(String thing_qty) {				//Agregar elementos al pedido con un String en la forma "item cantidad".
 		
 		if(this.content.isEmpty()) {									//caso 1: lista vacía, nada que comprobar, agrega directamente
 			this.content.add(thing_qty);
@@ -64,9 +65,8 @@ public class Pedido implements Serializable {
 								this.content.add(newItem);	
 		}	
 	}
-	
-		//Revisa si el item que se desea agregar ya está en la lista o no.	
-	public int duplicatePos(String check)  {				
+			
+	public int duplicatePos(String check)  {				//Revisa si el item que se desea agregar ya está en la lista o no.	
 		Iterator<String> it = content.iterator();			//Crea un iterador de la lista, y scanners para obtener solo los item, al estar en la forma "item cantidad"
 		Reader readerOld = new Reader(check);
 				String temp = "";
@@ -90,7 +90,8 @@ public class Pedido implements Serializable {
 		return -1;											//en caso de no haber coincidencias, devuelve -1.
 	}
 
-		//Getters y setters
+	
+		
 	public int getId() {
 		return id;
 	}
@@ -108,30 +109,33 @@ public class Pedido implements Serializable {
 	}
 	
 	@Override
-	public String toString() {	
-		StringBuilder builder = new StringBuilder();
+	public String toString() {
+		
+			StringBuilder builder = new StringBuilder();
 			
 			
-		for ( String s : this.content)
-	    {
-			String[] outputArr=s.split(" ");
-			int spaces = 20 - outputArr[0].length();
-			String space = "";
-			String capital = outputArr[0].toString().substring(0, 1).toUpperCase() + outputArr[0].toString().substring(1);
+			for ( String s : this.content){
+				String[] outputArr=s.split(" ");
+				int spaces = 20 - outputArr[0].length();
+				String space = "";
+				String capital = outputArr[0].toString().substring(0, 1).toUpperCase() + outputArr[0].toString().substring(1);
 			
-			for(int i = 1; i<=spaces;i++) {
-				space = (space + " ");
-			}			
-	        builder.append(capital);
-	        builder.append(space);
-	        try {
-	        builder.append(outputArr[1]);
-	        }catch(ArrayIndexOutOfBoundsException e) {
-	        	builder.append("1");
-	        }
+					for(int i = 1; i<=spaces;i++) {
+						space = (space + " ");
+					}	
+					
+					builder.append(capital);
+						builder.append(space);
+					try {
+						builder.append(outputArr[1]);
+					}catch(ArrayIndexOutOfBoundsException e) {
+						builder.append("1");
+					}
 	        builder.append("\n"); 
 	    }	
-		return ("# " + this.id + "\n" + "\n" + builder);
+		return ("Pedido No. " + this.id + "\n" + "\n" + builder);
+	
+		
 	}
 	
 }

@@ -10,14 +10,17 @@ import data.Cliente;
 import data.DB;
 import data.Pedido;
 
+
 public class Engine implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 		private static  DB database;
-		private boolean admin = false;
-		private boolean client = false;
+		private boolean adminLogin = false;
+		private boolean clientLogin = false;
 		private boolean contains = false;
 		private int index = -1;
+		private Cliente client;
+		private Admin admin;
 		
 	public void run() throws InterruptedException {
 			Engine.database = new DB();
@@ -26,9 +29,9 @@ public class Engine implements Serializable{
 		}
 		
 		public void end()  {
-			File clients = new File("ClientesDB.dat");
+			File clients = new File("data/ClientesDB.dat");
 			businessLogic.DataLoader.saveClients(clients,Engine.database);
-			File admins = new File("AdminsDB.dat");
+			File admins = new File("data/AdminsDB.dat");
 			businessLogic.DataLoader.saveAdmins(admins,Engine.database);
 		}
 		
@@ -52,13 +55,14 @@ public class Engine implements Serializable{
 					for(Admin a : database.getAdminBase()) {
 						if(a.getUsername().equals(username)) {
 							if(a.getPassword().equals(password)) {
-								System.out.println("Se ha encontrado una coincidencia!");
-								this.admin = true;
-								this.client = false;
+								//System.out.println("Se ha encontrado una coincidencia!");
+								this.adminLogin = true;
+								this.clientLogin = false;
+								this.admin = a;
 							}
 						}
 						counter++;
-						if(counter == database.getAdminBase().size() && admin==false)
+						if(counter == database.getAdminBase().size() && adminLogin==false)
 							System.out.println("Usuario o contraseña incorrectos. ");
 					}
 							
@@ -67,26 +71,26 @@ public class Engine implements Serializable{
 						for(Cliente c : database.getClientBase()) {
 							if(c.getUsername().equals(username)) {
 								if(c.getPassword().equals(password)) {
-									this.client = true;
-									this.admin = false;
+									this.clientLogin = true;
+									this.adminLogin = false;
+									this.client = c;
+									System.out.println("Se ha ingresado exitosamente");
 								}else
 									System.out.println("Contraseña incorrecta");
-							}
+							}else
 							counter++;
+							
 								if(counter == database.getAdminBase().size())
 									System.out.println("Usuario no encontrado.");
 						}
 					
-				}else
+				}else {
 					System.out.println("Entrada inválida");
-					client = false;
-					admin = false;
-					
+					clientLogin = false;
+					adminLogin = false;
+				}
 		}
-			
-
-		
-		
+					
 		public  void registro() {
 			Reader rdRegister = new Reader();
 			Reader rdRegisterInt = new Reader();
@@ -150,15 +154,14 @@ public class Engine implements Serializable{
 				System.out.println("Entrada inválida");
 		}
 		
-		
 		public  void tomaPedido() {
 			Reader rdOrder = new Reader();
 				Pedido order = new Pedido();
 					String orderStr="";
-					Reader rdInt = new Reader();
+					//Reader rdInt = new Reader();
 					
-			System.out.println("Introduzca el ID del cliente: ");			
-				Integer id = Integer.parseInt(rdInt.next());
+			//System.out.println("Introduzca el ID del cliente: ");			
+				//Integer id = Integer.parseInt(rdInt.next());
 					
 			System.out.println("Introduzca el pedido en el formato *Item Cantidad*. Si solo es una unidad basta con poner solo *Item*. Escriba *fin* para terminar la toma del pedido");		
 				orderStr = rdOrder.nextLowercase();
@@ -167,10 +170,9 @@ public class Engine implements Serializable{
 				order.addContent(orderStr);
 					orderStr = rdOrder.nextLowercase();
 			}		
-			database.updateClient(id, order);
+			database.updateClient(this.client, order);
 		}
-
-		
+	
 		public void eliminar() {
 			Reader rdElim = new Reader();
 			ArrayList<Cliente> temp = new ArrayList<Cliente>();
@@ -215,13 +217,131 @@ public class Engine implements Serializable{
 		public DB getDatabase() {
 			return Engine.database;
 		}
-
 		
 		public boolean getAdminState() {
-			return this.admin;
+			return this.adminLogin;
 		}
 		
 		public boolean getClientState() {
+			return this.clientLogin;
+		}
+
+		public void setAdminState(Boolean b) {
+			this.adminLogin = b;
+		}
+		
+		public void setClientState(Boolean b) {
+			this.clientLogin = b;
+		}
+		
+		public Admin getAdmin() {
+			return this.admin;
+		}
+		
+		public Cliente getClient() {
 			return this.client;
 		}
+		
+	
+		
+		public void diezMil() {
+			Engine.database = new DB();
+			
+			System.out.print("10.000 datos: ");
+			
+			long startTime = System.currentTimeMillis();  
+				for(int i = 0; i<10000 ; i++) {	
+					Cliente client = new Cliente(i,"Test " + i ,"test"+i , "default" + i);			
+					Engine.database.saveClient(client);
+				}
+			long stopTime = System.currentTimeMillis();
+		    	long elapsedTime = stopTime - startTime;
+		    		
+		    			System.out.println(elapsedTime + " ms");
+		    			System.out.println("Cantidad de datos almacenados: " + database.getClientBase().size());
+			
+		}
+		
+		public void cienMil() {
+			Engine.database = new DB();
+			
+			System.out.print("\n100.000 datos: ");
+			
+			long startTime = System.currentTimeMillis();  
+				for(int i = 0; i<100000 ; i++) {	
+					Cliente client = new Cliente(i,"Test " + i ,"test"+i , "default" + i);			
+					Engine.database.saveClient(client);
+				}
+			long stopTime = System.currentTimeMillis();
+		    	long elapsedTime = stopTime - startTime;		    		
+		    			System.out.println(elapsedTime + " ms");
+		    			System.out.println("Cantidad de datos almacenados: " + database.getClientBase().size());
+			
+			
+		}
+		
+		public void millon() {
+			Engine.database = new DB();
+			
+			System.out.print("\n1.000.000 datos: ");
+			
+			long startTime = System.currentTimeMillis();  
+				for(int i = 0; i<1000000 ; i++) {	
+					Cliente client = new Cliente(i,"Test " + i ,"test"+i , "default" + i);			
+					Engine.database.saveClient(client);
+				}
+			long stopTime = System.currentTimeMillis();
+		    	long elapsedTime = stopTime - startTime;
+		    		double elapsedTimeS = (double) elapsedTime/1000.00;	
+		    			double elapsedTimeM = elapsedTimeS/60;
+		    				System.out.println(elapsedTime + " ms");
+		    				System.out.println(elapsedTimeS + "s");
+		    				System.out.println(elapsedTimeM + "min");
+		    				System.out.println("Cantidad de datos almacenados: " + database.getClientBase().size());
+		}
+		
+		public void diezMillones() {
+			Engine.database = new DB();
+			
+			System.out.print("\n10.000.000 datos: ");
+			
+			long startTime = System.currentTimeMillis();  
+				for(int i = 0; i<10000000 ; i++) {	
+					Cliente client = new Cliente(i,"Test " + i ,"test"+i , "default" + i);			
+					Engine.database.saveClient(client);
+				}
+			long stopTime = System.currentTimeMillis();
+		    	long elapsedTime = stopTime - startTime;    		
+	    		double elapsedTimeS = (double) elapsedTime/1000.00;	
+    			double elapsedTimeM = elapsedTimeS/60;
+    				System.out.println(elapsedTime + " ms");
+    				System.out.println(elapsedTimeS + "s");
+    				System.out.println(elapsedTimeM + "min");
+    				System.out.println("Cantidad de datos almacenados: " + database.getClientBase().size());
+		}
+		
+		public void cienMillones() {
+			Engine.database = new DB();
+			
+			System.out.print("\n100.000.000 datos: ");
+			
+			long startTime = System.currentTimeMillis();  
+				for(int i = 0; i<100000000 ; i++) {	
+					Cliente client = new Cliente(i,"Test " + i ,"test"+i , "default" + i);			
+					Engine.database.saveClient(client);
+				}
+			long stopTime = System.currentTimeMillis();
+		    	long elapsedTime = stopTime - startTime;
+		    		
+	    		double elapsedTimeS = (double) elapsedTime/1000.00;	
+    			double elapsedTimeM = elapsedTimeS/60;
+    				System.out.println(elapsedTime + " ms");
+    				System.out.println(elapsedTimeS + "s");
+    				System.out.println(elapsedTimeM + "min");
+    				System.out.println("Cantidad de datos almacenados: " + database.getClientBase().size());
+		}
+
+
 }
+
+
