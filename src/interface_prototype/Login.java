@@ -11,7 +11,11 @@ public class Login extends javax.swing.JFrame {
 
     public static String username = ""; //Se declara as� para enviar datos entre interfaces
     String password = "";
-    private Engine e;
+    public static Engine e;
+
+    public Engine getE() {
+        return e;
+    }
 
     /**
      * Creates new form Login
@@ -31,7 +35,7 @@ public class Login extends javax.swing.JFrame {
 
         ImageIcon wallapper_logo = new ImageIcon("src/images/bienvenida.png");
         Icon icono_logo = new ImageIcon(wallapper_logo.getImage().getScaledInstance(jLabel_Logo.getWidth(),
-                jLabel_Logo.getHeight(), Image.SCALE_DEFAULT));
+        jLabel_Logo.getHeight(), Image.SCALE_DEFAULT));
         jLabel_Logo.setIcon(icono_logo);
         this.repaint();
     }
@@ -143,9 +147,11 @@ public class Login extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null,"Error en el sistema intenta de nuevo");
         }
     }
+    
      private void jButton_NuevoActionPerformed(java.awt.event.ActionEvent evt) { 
          try{
-             new Registry().setVisible(true);
+             //new Registry().setVisible(true);
+             new Inventario().setVisible(true);
              dispose();
         }catch(Exception e){
             JOptionPane.showMessageDialog(null,"Error en el sistema intenta de nuevo");

@@ -200,7 +200,7 @@ public class RegistryAdmin extends javax.swing.JFrame {
        int v = JOptionPane.showConfirmDialog(null, "Estas seguro?","Algo",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE);
        if(v == JOptionPane.YES_OPTION){
            JOptionPane.showMessageDialog(null, "nlanalnal","nlaalana",JOptionPane.INFORMATION_MESSAGE);
-           new Login().setVisible(true);
+           new Administrator().setVisible(true);
            dispose();
        }
     }

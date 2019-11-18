@@ -18,6 +18,7 @@ public class Registry extends javax.swing.JFrame {
      */
     
     public Registry() {
+        
         initComponents();
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
         setTitle("Registrar Cliente" );

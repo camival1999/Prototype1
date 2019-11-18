@@ -9,6 +9,7 @@ import data.Admin;
 import data.Cliente;
 import data.DB;
 import data.Pedido;
+import data.Producto;
 
 
 public class Engine implements Serializable{
@@ -21,11 +22,20 @@ public class Engine implements Serializable{
 		private int index = -1;
 		private Cliente client;
 		private Admin admin;
+                private Producto p;
 		
 	public void run() throws InterruptedException {
 			Engine.database = new DB();
 			businessLogic.DataLoader.confirmClientDataBase(Engine.database);
 			businessLogic.DataLoader.confirmAdminDataBase(Engine.database);
+			businessLogic.DataLoader.confirmInventoryDataBase(Engine.database); 
+                        addInventory(2,15,"Blusa","Talla S","/images/blusa.png");
+                        
+                        addInventory(3,15,"Blusa","Talla S","/images/blusa.png");
+                        
+                        addInventory(4,15,"Blusa","Talla S","/images/blusa.png");
+                        
+                        addInventory(5,15,"Blusa","Talla S","/images/blusa.png");
 		}
 		
 	public void end()  {
@@ -33,6 +43,8 @@ public class Engine implements Serializable{
 			businessLogic.DataLoader.saveClients(clients,Engine.database);
 			File admins = new File("AdminsDB.dat");
 			businessLogic.DataLoader.saveAdmins(admins,Engine.database);
+                        File inventory = new File("InventoryDB.dat");
+			businessLogic.DataLoader.saveInventory(inventory,Engine.database);
 		}
 		
 	public void login() {
@@ -122,7 +134,7 @@ public class Engine implements Serializable{
                      return flag;
                 }
                 
-        public  void registroI(int id,String name,String username,String password ) {
+        public  void registroI(int id,String name,String username,String password ){
                 try {
                     Cliente client = new Cliente(id,name,username,password);
                     Engine.database.saveClient(client);
@@ -136,7 +148,7 @@ public class Engine implements Serializable{
                     try {
                         Admin admin = new Admin(id,name,username,password);
 			Engine.database.saveAdmin(admin);
-                        System.out.println("Cliente guardado exitosamente!");
+                        System.out.println("Admin guardado exitosamente!");
                     }catch(RuntimeException e) {
                         System.out.println("No se puedo guardar el admin, intente de nuevo");
                     }
@@ -259,7 +271,16 @@ public class Engine implements Serializable{
 				System.out.println("Entrada no v�lida. ID incorrecto o el cliente no existe");
 		}		
 
-		
+	public void addInventory(int idProducto, int cantidad,String nombreProducto,String descripcion,String urlImagen){
+            try {
+                    Producto p1 = new Producto(idProducto,cantidad,nombreProducto,descripcion,urlImagen);   
+                    
+                    Engine.database.saveProducto(p1);
+                    System.out.println("Producto guardado exitosamente!");
+		}catch(RuntimeException e) {
+                    System.out.println("No se puedo guardar el producto, intente de nuevo "+e);
+		} 
+        }	
 		
 		public DB getDatabase() {
 			return Engine.database;

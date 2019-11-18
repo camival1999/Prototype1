@@ -11,10 +11,14 @@ public class DB implements Serializable {
 	
 	private ArrayList<Cliente> clientBase;
 	private ArrayList<Admin> adminBase;
+         ArrayList<Producto> inventoryBase;
+
 	DataLoader dl;
 	public DB() {
 		this.clientBase = new ArrayList<Cliente>();
 		this.adminBase = new ArrayList<Admin>();
+                this.inventoryBase = new ArrayList<Producto>();
+                
 	}
 	
 	
@@ -65,7 +69,15 @@ public class DB implements Serializable {
 			else
 				throw new RuntimeException();
 	}
-	
+        
+	public void saveProducto(Producto p){
+            System.out.println("123324");
+                if(!inventoryBase.contains(p) )
+                   inventoryBase.add(p);
+                else
+                  throw new RuntimeException();
+        }
+        
 	public void updateClient(Cliente c, Pedido order) {							//actualiza la informacion del cliente en la base de datos
 		int index = clientBase.indexOf(c);
 		clientBase.get(index).assignOrder(order);
@@ -127,5 +139,13 @@ public class DB implements Serializable {
 	public void setAdminBase(ArrayList<Admin> adminBase) {
 		this.adminBase = adminBase;
 	}
+        
+        public ArrayList<Producto> getInventoryBase() {
+            return inventoryBase;
+        }
 
+        public void setInventoryBase(ArrayList<Producto> inventoryBase) {
+            this.inventoryBase = inventoryBase;
+        }
+        
 }

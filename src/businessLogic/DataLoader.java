@@ -12,20 +12,38 @@ import java.util.concurrent.TimeUnit;
 import data.DB;
 import data.Admin;
 import data.Cliente;
+import data.Producto;
 
 public class DataLoader {
 	public static File clients = new File("ClientesDB.dat");
 	public static File admins = new File("AdminsDB.dat");
-	
+	public static File inventory = new File("InventoryDB.dat");
+        
 	public static File getClientsFile() {
 		return clients;
 	}
+
+        public static File getInventory() {
+        return inventory;
+    }
 	
 	public static File getAdminsFile() {
 		return admins;
 	}
 
-	
+	public static void confirmInventoryDataBase(DB db) throws InterruptedException{
+            try {
+                    if(!inventory.exists()) {
+                            if(inventory.createNewFile()) {
+                            }	
+                    }else {
+                            loadInventory(inventory,db);
+                    }
+            } catch (IOException e) {
+                    System.out.println("error de archivo");
+            }
+        }
+        
 	public static void confirmClientDataBase(DB db) throws InterruptedException{
 	try {
 		if(!clients.exists()) {
@@ -77,10 +95,46 @@ public class DataLoader {
 			objectOut.close();
 		}
 		catch (IOException e) {
-			System.out.println("No se pudo guardar la base de datos");
+			System.out.println("No se pudo guardar la base de datos"+e);
 		}
 	}
+        
+        public static void saveInventory(File tmpDir,DB db){
+            try {
+                FileOutputStream fileOut = new FileOutputStream(tmpDir);
+                ObjectOutputStream objectOut = new ObjectOutputStream(fileOut);
+                objectOut.writeObject(db.getInventoryBase());
+                System.out.println(db.getInventoryBase().size() + "Inventario guardado");
+                objectOut.close();
+            }catch (IOException e) {
+		System.out.println("No se pudo guardar la base de datos"+e);
+            }
+        }
 
+        
+        @SuppressWarnings({ "unchecked" })
+        public static void loadInventory(File tmpDir,DB db) throws InterruptedException {
+               ArrayList<Producto> inventory = new ArrayList<>();
+		
+		try {
+			FileInputStream fileIn = new FileInputStream(tmpDir);
+				ObjectInputStream objectIn = new ObjectInputStream(fileIn);	
+			
+			inventory = (ArrayList<Producto>) objectIn.readObject();	
+			
+			objectIn.close();
+				fileIn.close();
+				
+			db.setInventoryBase(inventory);
+			System.out.println(db.getInventoryBase().size() + " productos retrieved successfully\n");
+		}
+		catch (IOException e) {
+			System.out.println(db.getInventoryBase().size() + " productos retrieved. Operation failed.");
+		}
+		catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+           }
 	
 	@SuppressWarnings({ "unchecked" })
 	public static void loadClients(File tmpDir,DB db) throws InterruptedException {

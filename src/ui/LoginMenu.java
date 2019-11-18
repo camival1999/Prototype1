@@ -19,7 +19,6 @@ public class LoginMenu {
 	
 	
 	public void loginRun(Engine e) {
-		new usersManager().setVisible(true);
 		int selection = 0;
 		System.out.println("Bienvenido a la pantalla de inicio de sesi�n.\nQu� desea hacer?");
 		System.out.println("1.- Iniciar sesi�n          2.-Registrarse          3.- Salir");

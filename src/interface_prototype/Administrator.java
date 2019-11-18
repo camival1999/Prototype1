@@ -9,7 +9,6 @@ package interface_prototype;
  *
  * @author John_Riaño
  */
-
 import java.awt.Image;
 import java.awt.Toolkit;
 import javax.swing.Icon;
@@ -19,15 +18,14 @@ import javax.swing.WindowConstants;
 
 public class Administrator extends javax.swing.JFrame {
     
-    String user, nombre_usuario;
+    String user = Login.username, nombre_usuario;
     public static int sesion_usuario;
 
     /**
      * Creates new form Administrador
      */
     public Administrator() {
-        initComponents();   
-        user = Login.username;
+        initComponents();
         sesion_usuario = 1;
         
         setSize(650, 430);
@@ -43,7 +41,7 @@ public class Administrator extends javax.swing.JFrame {
         jLabel_Wallpaper.setIcon(icono);
         /*this.repaint();*/
         
-    }
+}
     
     @Override
     public Image getIconImage() {
@@ -82,7 +80,7 @@ public class Administrator extends javax.swing.JFrame {
 
         jLabel_NombreUsuario.setFont(new java.awt.Font("Arial", 1, 20)); // NOI18N
         jLabel_NombreUsuario.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel_NombreUsuario.setText("jLabel1");
+        jLabel_NombreUsuario.setText(user.toUpperCase());
         getContentPane().add(jLabel_NombreUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
 
         jButton_RegistrarUsuario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/addUser.png"))); // NOI18N
@@ -101,10 +99,10 @@ public class Administrator extends javax.swing.JFrame {
         });
         getContentPane().add(jButton_GestionarUsuarios, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 70, 120, 100));
 
-        jButton_Creatividad.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/creatividad.png"))); // NOI18N
+        jButton_Creatividad.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/paquetes.png"))); // NOI18N
         getContentPane().add(jButton_Creatividad, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 70, 120, 100));
 
-        jButton_Capturista.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/capturista.png"))); // NOI18N
+        jButton_Capturista.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/inventario.png"))); // NOI18N
         jButton_Capturista.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton_CapturistaActionPerformed(evt);
@@ -112,10 +110,10 @@ public class Administrator extends javax.swing.JFrame {
         });
         getContentPane().add(jButton_Capturista, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 240, 120, 100));
 
-        jButton_Tecnico.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/tecnico.png"))); // NOI18N
+        jButton_Tecnico.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/grafica.png"))); // NOI18N
         getContentPane().add(jButton_Tecnico, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 240, 120, 100));
 
-        jButton_AcercaDe.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/geekipedia.png"))); // NOI18N
+        jButton_AcercaDe.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/opciones.png"))); // NOI18N
         getContentPane().add(jButton_AcercaDe, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 240, 120, 100));
 
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
@@ -127,23 +125,23 @@ public class Administrator extends javax.swing.JFrame {
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 170, -1, -1));
 
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel3.setText("Creatividad");
+        jLabel3.setText("Ver Paquetes");
         getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 170, -1, -1));
 
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel4.setText("Panel vista capturista");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 340, -1, -1));
+        jLabel4.setText("Inventario");
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 340, -1, -1));
 
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel5.setText("Panel vista Técnico");
-        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 340, -1, -1));
+        jLabel5.setText("Finanzas");
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 340, -1, -1));
 
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("Acerca de");
         getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 340, -1, -1));
 
         jLabel7.setText(" Creado por Grupo 7 ®");
-        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 380, -1, -1));
+        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 380, -1, -1));
         getContentPane().add(jLabel_Wallpaper, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 650, 430));
 
         pack();

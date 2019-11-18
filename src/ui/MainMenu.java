@@ -4,6 +4,11 @@ import java.io.Serializable;
 
 import businessLogic.Engine;
 import businessLogic.Reader;
+import interface_prototype.Administrator;
+import interface_prototype.Inventario;
+import interface_prototype.Login;
+import interface_prototype.Registry;
+import interface_prototype.usersManager;
 
 public class MainMenu implements Serializable{
 	
@@ -11,10 +16,13 @@ public class MainMenu implements Serializable{
 	private static Engine shop;
 	
 	public static void main(String[] args) throws InterruptedException{	
-		shop = new Engine();
+		shop = new Engine();                
+		shop.run();
 		LoginMenu lg = new LoginMenu(shop);
 		boolean exit = false;
-		
+		new Login().setVisible(true);
+                
+                shop.end();
 		//pruebas de tiempo registrando clientes
 		/*
 		starter.diezMil();
@@ -22,9 +30,8 @@ public class MainMenu implements Serializable{
 		starter.millon();
 		starter.diezMillones();
 		starter.cienMillones();
-		*/
 		
-		shop.run();
+		
 		
 		while (!exit) {
 			lg.loginRun(shop);
@@ -42,7 +49,7 @@ public class MainMenu implements Serializable{
 		
 		shop.end();
 		System.out.println("			Hasta pronto!");
-		
+		*/
 	}
 
 	public static void adminMenu(Engine en) {
