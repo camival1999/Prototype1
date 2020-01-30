@@ -24,7 +24,7 @@ public class RegistryAdmin extends javax.swing.JFrame {
     public RegistryAdmin() {
         initComponents();
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
-        setTitle("Registrar Cliente" );
+        setTitle("Registrar Admin" );
         setSize(530, 350);
         setResizable(false);
         setLocationRelativeTo(null);
@@ -96,7 +96,7 @@ public class RegistryAdmin extends javax.swing.JFrame {
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel6.setText("Registrar cliente:");
+        jLabel6.setText("Registrar admin:");
         getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 200, -1, -1));
 
         txt_id.setBackground(new java.awt.Color(153, 153, 255));
@@ -201,7 +201,7 @@ public class RegistryAdmin extends javax.swing.JFrame {
        if(v == JOptionPane.YES_OPTION){
            JOptionPane.showMessageDialog(null, "nlanalnal","nlaalana",JOptionPane.INFORMATION_MESSAGE);
            new Administrator().setVisible(true);
-           dispose();
+           this.dispose();
        }
     }
     

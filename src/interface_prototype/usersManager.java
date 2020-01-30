@@ -10,6 +10,10 @@ import javax.swing.ImageIcon;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
+import interface_prototype.Registry;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import javax.swing.JFrame;
 /**
  *
  * @author John_Riaño
@@ -25,7 +29,7 @@ public class usersManager extends javax.swing.JFrame {
      */
     @SuppressWarnings("empty-statement")
     public usersManager() {
-        new RegistryAdmin().cerrar();
+        cerrar();
         initComponents();
         user = Login.username;
         
@@ -62,6 +66,22 @@ public class usersManager extends javax.swing.JFrame {
                 model.addRow(at);
                 i++;
             }        
+    }
+     public void cerrar(){
+        try{
+            this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+            addWindowListener(new WindowAdapter() {
+                @Override
+                public void windowClosing(WindowEvent e){
+                    //hace algo al oprimir cerrar
+                    //confirmarCerrar();
+                    new Administrator();
+                }
+            });
+            this.setVisible(true);
+        }catch(Exception e){
+            System.out.println(e);
+        }
     }
     @Override
     public Image getIconImage() {
@@ -122,5 +142,6 @@ public class usersManager extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable_usuarios;
     // End of variables declaration                   
+
 }
 

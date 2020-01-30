@@ -158,7 +158,6 @@ public class Administrator extends javax.swing.JFrame {
 
     private void jButton_GestionarUsuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_GestionarUsuariosActionPerformed
        // try{
-        System.out.println("eeeeeeeeeeeeeeeeeeeee");
              new usersManager().setVisible(true);
              dispose();
         //}catch(Exception e){
