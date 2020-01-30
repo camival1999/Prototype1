@@ -23,33 +23,6 @@ public class MainMenu implements Serializable{
 		new Login().setVisible(true);
                 
                 shop.end();
-		//pruebas de tiempo registrando clientes
-		/*
-		starter.diezMil();
-		starter.cienMil();
-		starter.millon();
-		starter.diezMillones();
-		starter.cienMillones();
-		
-		
-		
-		while (!exit) {
-			lg.loginRun(shop);
-			exit = lg.getExitSate();
-		
-				if(!exit) {
-					System.out.println("admin " + shop.getAdminState());
-					System.out.println("cliente " + shop.getClientState());
-					if(shop.getAdminState())
-						adminMenu(shop);
-					else if(shop.getClientState())
-						clientMenu(shop);
-				}						
-		}
-		
-		shop.end();
-		System.out.println("			Hasta pronto!");
-		*/
 	}
 
 	public static void adminMenu(Engine en) {

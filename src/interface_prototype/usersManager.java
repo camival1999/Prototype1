@@ -25,6 +25,7 @@ public class usersManager extends javax.swing.JFrame {
      */
     @SuppressWarnings("empty-statement")
     public usersManager() {
+        new RegistryAdmin().cerrar();
         initComponents();
         user = Login.username;
         

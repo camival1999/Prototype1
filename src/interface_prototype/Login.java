@@ -4,6 +4,8 @@ package interface_prototype;
 import businessLogic.Engine;
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
@@ -121,6 +123,12 @@ public class Login extends javax.swing.JFrame {
         pack();
     }// </editor-fold>                        
 
+   /* public void keyPressed(KeyEvent e) {
+        if (e.getKeyCode()==KeyEvent.VK_ENTER){
+             jButton_AccederActionPerformed(e);
+        }
+   }*/
+    
     private void jButton_AccederActionPerformed(java.awt.event.ActionEvent evt) {                                                
         e = new Engine();
         username = txt_user.getText().trim();
@@ -128,13 +136,15 @@ public class Login extends javax.swing.JFrame {
         try{
             if (!username.equals("") && !password.equals("")) {
                 if(e.loginI(username, password)){
-                    System.out.println(new Engine().getAdminState());
+                    //System.out.println(new Engine().getAdminState());
                     if(e.getAdminState()){
                         System.out.println("Se ha ingresado exitosamente Admin");
                         new Administrator().setVisible(true);
                         dispose();
                     }else{
                         System.out.println("Se ha ingresado exitosamente Cliente");
+                        new Inventario().setVisible(true);
+                        dispose();
                     }
                 }else{
                     JOptionPane.showMessageDialog(null, "Datos de acceso incorrectos.");
@@ -150,8 +160,8 @@ public class Login extends javax.swing.JFrame {
     
      private void jButton_NuevoActionPerformed(java.awt.event.ActionEvent evt) { 
          try{
-             //new Registry().setVisible(true);
-             new Inventario().setVisible(true);
+             new Registry().setVisible(true);
+             //new Inventario().setVisible(true);
              dispose();
         }catch(Exception e){
             JOptionPane.showMessageDialog(null,"Error en el sistema intenta de nuevo");
@@ -175,7 +185,8 @@ public class Login extends javax.swing.JFrame {
                         setBounds(0,0,350,450);
 			setVisible(true);
 			setResizable(false);
-			setLocationRelativeTo(null);
+			setLocationRelativeTo(null);                      
+                        this.addKeyListener((KeyListener) this);
 		}
 
 }

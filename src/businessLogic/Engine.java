@@ -29,13 +29,7 @@ public class Engine implements Serializable{
 			businessLogic.DataLoader.confirmClientDataBase(Engine.database);
 			businessLogic.DataLoader.confirmAdminDataBase(Engine.database);
 			businessLogic.DataLoader.confirmInventoryDataBase(Engine.database); 
-                        addInventory(2,15,"Blusa","Talla S","/images/blusa.png");
-                        
-                        addInventory(3,15,"Blusa","Talla S","/images/blusa.png");
-                        
-                        addInventory(4,15,"Blusa","Talla S","/images/blusa.png");
-                        
-                        addInventory(5,15,"Blusa","Talla S","/images/blusa.png");
+                        //addInventory(2,15,"Blusa","Talla S","/images/blusa.png");
 		}
 		
 	public void end()  {
