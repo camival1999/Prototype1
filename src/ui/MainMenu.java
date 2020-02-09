@@ -4,54 +4,116 @@ import java.io.Serializable;
 
 import businessLogic.Engine;
 import businessLogic.Reader;
+import interface_prototype.Administrator;
+import interface_prototype.Inventario;
+import interface_prototype.InventarioAdmin;
+import interface_prototype.Login;
+import interface_prototype.Registry;
+import interface_prototype.Pedidos;
+import interface_prototype.usersManager;
 
 public class MainMenu implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
-	private static Engine starter;
+	private static Engine shop;
 	
-	public static void main(String[] args) throws InterruptedException{
-		starter = new Engine();
-		starter.run();
-		
-		int selection=0;
-			boolean exit = false;			
-			Reader reader = new Reader();
+	public static void main(String[] args) throws InterruptedException{	
+		shop = new Engine();                
+		shop.run();
+		//LoginMenu lg = new LoginMenu(shop);
+		boolean exit = false;
+		new Login().setVisible(true);
+                
+                shop.end();
+	}
+
+	public static void adminMenu(Engine en) {
+		int selection = 0;
+		boolean exit = false;
+		Reader reader = new Reader();
 		
 		System.out.println("     ****** Bienvenido a la tienda VirtUNAL *****\n");
 		
 		while(!exit) {		
-		selection = 0;
+			selection = 0;
 		
-		System.out.println("                   Menú principal\n            *--------------------------*");
-		System.out.println("Seleccione una opción:\n");
-		System.out.println("1.- Ver clientes                  2.- Registrar nuevo cliente                  3.- Tomar pedido");
-		System.out.println("4.- Eliminar cliente/pedido       5.- Salir");
+			System.out.println("                   Menï¿½ principal\n            *--------------------------*");
+			System.out.println("Seleccione una opciï¿½n:\n");
+			System.out.println("1.- Ver clientes                      2.- Ver administradores                  3.- Ver pedidos en curso");
+			System.out.println("4.- Eliminar clientes o pedidos 	  5.- Cerrar sesiï¿½n");
 		
 			try{
 				selection = Integer.parseInt(reader.next());
 									
 				if(selection>5 || selection<1)
-					System.out.println("			Entrada no válida");
+					System.out.println("			Entrada no vï¿½lida");
 			
 				if(selection==1)
-					starter.getDatabase().print();
+					shop.getDatabase().printClients();
 				else if(selection==2)
-					starter.registro();
-				else if(selection==3)
-					starter.tomaPedido();
-				else if(selection==4)
-					starter.eliminar();
-				else if(selection==5)
+					shop.getDatabase().printAdmins();
+				else if(selection==3) {
+					shop.getDatabase().printOrders();
+				}else if(selection==4)
+					shop.eliminar();
+				else if(selection==5) {
 					exit = true;
-			
+					en.setAdminState(false);	
+				}
 			}catch(NumberFormatException e) {
-				System.out.println("			Entrada no válida");
+				System.out.println("			Entrada no vï¿½lida");
 			}
 	
 		}	
-		starter.end();
-		System.out.println("			Hasta pronto!");
+		shop.end();
+		System.out.println("			Se ha cerrado sesiï¿½n");
+		
+		
 	}
-
+	
+	public static void clientMenu(Engine en) {
+		int selection = 0;
+		boolean exit = false;
+		Reader reader = new Reader();
+                
+		System.out.println("     ****** Bienvenido a la tienda VirtUNAL *****\n");
+		
+		while(!exit) {		
+		selection = 0;
+		
+		System.out.println("                   Menï¿½ principal\n            *--------------------------*");
+		System.out.println("Seleccione una opciï¿½n:\n");
+		System.out.println("1.- Ver productos/Realizar pedido                  2.- Ver pedido en curso           3.- Cerrar sesiï¿½n");
+	
+		
+			try{
+				selection = Integer.parseInt(reader.next());
+									
+				if(selection>5 || selection<1)
+					System.out.println("			Entrada no vï¿½lida");
+			
+				if(selection==1)
+					shop.tomaPedido();
+				else if(selection==2)
+					System.out.println(shop.getClient().getShoppingCart());
+				else if(selection==3) {
+					exit = true;
+					en.setClientState(false);
+				}
+			}catch(NumberFormatException e) {
+				System.out.println("			Entrada no vï¿½lida");
+			}
+	
+		}	
+		shop.end();
+		System.out.println("			Se ha cerrado sesiï¿½n");
+		
+		
+	}
+	
+	
+	
+	public static Engine getEngine() {
+		return shop;
+	}
 }
