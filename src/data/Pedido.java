@@ -24,7 +24,7 @@ public class Pedido implements Serializable {
     }
         
 	public Pedido() {
-		this.id = 0;
+		this.id = 1;
 		this.content= new ArrayList<String>();
 	}
 

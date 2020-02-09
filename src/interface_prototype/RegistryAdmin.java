@@ -1,4 +1,4 @@
-package interface_prototype;
+ package interface_prototype;
 
 import businessLogic.Engine;
 import java.awt.Color;
@@ -179,7 +179,8 @@ public class RegistryAdmin extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Debes de llenar todos los campos.");
         }
          limpiar();
-    }                                       
+    }   
+    
     public void cerrar(){
         try{
             this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);

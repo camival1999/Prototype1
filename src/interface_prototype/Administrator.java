@@ -11,6 +11,7 @@ package interface_prototype;
  */
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
@@ -61,8 +62,8 @@ public class Administrator extends javax.swing.JFrame {
         jLabel_NombreUsuario = new javax.swing.JLabel();
         jButton_RegistrarUsuario = new javax.swing.JButton();
         jButton_GestionarUsuarios = new javax.swing.JButton();
-        jButton_Creatividad = new javax.swing.JButton();
-        jButton_Capturista = new javax.swing.JButton();
+        jButton_Pedidos = new javax.swing.JButton();
+        jButton_Inventario = new javax.swing.JButton();
         jButton_Tecnico = new javax.swing.JButton();
         jButton_AcercaDe = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
@@ -98,17 +99,22 @@ public class Administrator extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jButton_GestionarUsuarios, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 70, 120, 100));
-
-        jButton_Creatividad.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/paquetes.png"))); // NOI18N
-        getContentPane().add(jButton_Creatividad, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 70, 120, 100));
-
-        jButton_Capturista.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/inventario.png"))); // NOI18N
-        jButton_Capturista.addActionListener(new java.awt.event.ActionListener() {
+        
+        jButton_Pedidos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/paquetes.png"))); // NOI18N
+         jButton_Pedidos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton_CapturistaActionPerformed(evt);
+                jButton_PedidosActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton_Capturista, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 240, 120, 100));
+        getContentPane().add(jButton_Pedidos, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 70, 120, 100));
+
+        jButton_Inventario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/inventario.png"))); // NOI18N
+        jButton_Inventario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_InventarioActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton_Inventario, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 240, 120, 100));
 
         jButton_Tecnico.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/grafica.png"))); // NOI18N
         getContentPane().add(jButton_Tecnico, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 240, 120, 100));
@@ -117,15 +123,15 @@ public class Administrator extends javax.swing.JFrame {
         getContentPane().add(jButton_AcercaDe, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 240, 120, 100));
 
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("Registrar Usuario");
+        jLabel1.setText("Registrar Administrador");
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 170, -1, -1));
 
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("Gestionar Usuarios");
+        jLabel2.setText("Gestionar Cliente");
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 170, -1, -1));
 
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel3.setText("Ver Paquetes");
+        jLabel3.setText("Ver Pedidos");
         getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 170, -1, -1));
 
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
@@ -165,17 +171,18 @@ public class Administrator extends javax.swing.JFrame {
         //}
     }//GEN-LAST:event_jButton_GestionarUsuariosActionPerformed
 
-    private void jButton_CapturistaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_CapturistaActionPerformed
-        
-        //Capturista capturista = new Capturista();
-        //capturista.setVisible(true);
-        
-    }//GEN-LAST:event_jButton_CapturistaActionPerformed
-
+    private  void jButton_PedidosActionPerformed(ActionEvent evt) {
+            new Pedidos().setVisible(true);
+            dispose();
+    }
+    private void jButton_InventarioActionPerformed(ActionEvent evt) {
+            new InventarioAdmin().setVisible(true);
+            dispose();
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton_AcercaDe;
-    private javax.swing.JButton jButton_Capturista;
-    private javax.swing.JButton jButton_Creatividad;
+    private javax.swing.JButton jButton_Inventario;
+    private javax.swing.JButton jButton_Pedidos;
     private javax.swing.JButton jButton_GestionarUsuarios;
     private javax.swing.JButton jButton_RegistrarUsuario;
     private javax.swing.JButton jButton_Tecnico;

@@ -6,8 +6,10 @@ import businessLogic.Engine;
 import businessLogic.Reader;
 import interface_prototype.Administrator;
 import interface_prototype.Inventario;
+import interface_prototype.InventarioAdmin;
 import interface_prototype.Login;
 import interface_prototype.Registry;
+import interface_prototype.Pedidos;
 import interface_prototype.usersManager;
 
 public class MainMenu implements Serializable{
@@ -18,7 +20,7 @@ public class MainMenu implements Serializable{
 	public static void main(String[] args) throws InterruptedException{	
 		shop = new Engine();                
 		shop.run();
-		LoginMenu lg = new LoginMenu(shop);
+		//LoginMenu lg = new LoginMenu(shop);
 		boolean exit = false;
 		new Login().setVisible(true);
                 
