@@ -8,6 +8,7 @@ import java.util.InputMismatchException;
 import data.Admin;
 import data.Cliente;
 import data.DB;
+import data.Inventario;
 import data.Pedido;
 import data.Producto;
 
@@ -323,6 +324,142 @@ public class Engine implements Serializable{
 		    			System.out.println("Cantidad de datos almacenados: " + Engine.database.getClientBase().size());
 			
 		}
+                
+                public void testInventario() {
+                    Inventario in0 = new Inventario();
+			
+			System.out.print("1.000 datos: ");
+			
+			long startTime = System.currentTimeMillis();  
+				for(int i = 0; i<1000 ; i++) {	
+					Producto p = new Producto(i, 1, "random" + i, "test" + i, "src/images/wallpaperPrincipal.jpg");			
+					in0.agregarInventario(p, 1);
+				}
+			long stopTime = System.currentTimeMillis();
+		    	long elapsedTime = stopTime - startTime;
+		    		
+		    			System.out.println("tiempo agregado: " + elapsedTime + " ms");
+		    			
+                                        
+                        System.out.print("10.000 datos: ");
+			
+			 startTime = System.currentTimeMillis();  
+				for(int i = 0; i<10000 ; i++) {	
+					Producto p = new Producto(i, 1, "random" + i, "test" + i, "src/images/wallpaperPrincipal.jpg");			
+					in0.agregarInventario(p, 1);
+				}
+			 stopTime = System.currentTimeMillis();
+		    	 elapsedTime = stopTime - startTime;
+		    		
+		    			System.out.println("tiempo agregado: " + elapsedTime + " ms");
+		    			
+                    
+			System.out.print("100.000 datos: ");
+			
+			 startTime = System.currentTimeMillis();  
+				for(int i = 0; i<100000 ; i++) {	
+					Producto p = new Producto(i, 1, "random" + i, "test" + i, "src/images/wallpaperPrincipal.jpg");			
+					in0.agregarInventario(p, 1);
+				}
+			 stopTime = System.currentTimeMillis();
+		    	 elapsedTime = stopTime - startTime;
+		    		
+		    			System.out.println("tiempo agregado: " + elapsedTime + " ms");
+                        
+                          System.out.print("200.000 datos: ");
+			
+			 startTime = System.currentTimeMillis();  
+				for(int i = 0; i<200000 ; i++) {	
+					Producto p = new Producto(i, 1, "random" + i, "test" + i, "src/images/wallpaperPrincipal.jpg");			
+					in0.agregarInventario(p, 1);
+				}
+			 stopTime = System.currentTimeMillis();
+		    	 elapsedTime = stopTime - startTime;
+		    		
+		    			System.out.println("tiempo agregado: " + elapsedTime + " ms");
+		    			      
+                            
+                                        
+                          System.out.print("400.000 datos: ");
+			
+			 startTime = System.currentTimeMillis();  
+				for(int i = 0; i<400000 ; i++) {	
+					Producto p = new Producto(i, 1, "random" + i, "test" + i, "src/images/wallpaperPrincipal.jpg");			
+					in0.agregarInventario(p, 1);
+				}
+			 stopTime = System.currentTimeMillis();
+		    	 elapsedTime = stopTime - startTime;
+		    		
+		    			System.out.println("tiempo agregado: " + elapsedTime + " ms");
+		    			             
+                                        
+                            
+                          System.out.print("700.000 datos: ");
+			
+			 startTime = System.currentTimeMillis();  
+				for(int i = 0; i<700000 ; i++) {	
+					Producto p = new Producto(i, 1, "random" + i, "test" + i, "src/images/wallpaperPrincipal.jpg");			
+					in0.agregarInventario(p, 1);
+				}
+			 stopTime = System.currentTimeMillis();
+		    	 elapsedTime = stopTime - startTime;
+		    		
+		    			System.out.println("tiempo agregado: " + elapsedTime + " ms");
+		    			              
+                           
+                          System.out.print("1.000.000 datos: ");
+			
+			 startTime = System.currentTimeMillis();  
+				for(int i = 0; i<1000000 ; i++) {	
+					Producto p = new Producto(i, 1, "random" + i, "test" + i, "src/images/wallpaperPrincipal.jpg");			
+					in0.agregarInventario(p, 1);
+				}
+			 stopTime = System.currentTimeMillis();
+		    	 elapsedTime = stopTime - startTime;
+		    		
+		    			System.out.println("tiempo agregado: " + elapsedTime + " ms");
+                                        
+                                        
+                          System.out.print("1.300.000 datos: ");
+			
+			 startTime = System.currentTimeMillis();  
+				for(int i = 0; i<1300000 ; i++) {	
+					Producto p = new Producto(i, 1, "random" + i, "test" + i, "src/images/wallpaperPrincipal.jpg");			
+					in0.agregarInventario(p, 1);
+				}
+			 stopTime = System.currentTimeMillis();
+		    	 elapsedTime = stopTime - startTime;
+		    		
+		    			System.out.println("tiempo agregado: " + elapsedTime + " ms");
+		    	
+                        System.out.print("1.700.000 datos: ");
+			
+			 startTime = System.currentTimeMillis();  
+				for(int i = 0; i<1700000 ; i++) {	
+					Producto p = new Producto(i, 1, "random" + i, "test" + i, "src/images/wallpaperPrincipal.jpg");			
+					in0.agregarInventario(p, 1);
+				}
+			 stopTime = System.currentTimeMillis();
+		    	 elapsedTime = stopTime - startTime;
+		    		
+		    			System.out.println("tiempo agregado: " + elapsedTime + " ms");  
+                                        
+                                            
+                         System.out.print("2.500.000 datos: ");
+			
+			 startTime = System.currentTimeMillis();  
+				for(int i = 0; i<2500000 ; i++) {	
+					Producto p = new Producto(i, 1, "random" + i, "test" + i, "src/images/wallpaperPrincipal.jpg");			
+					in0.agregarInventario(p, 1);
+				}
+			 stopTime = System.currentTimeMillis();
+		    	 elapsedTime = stopTime - startTime;
+		    		
+		    			System.out.println("tiempo agregado: " + elapsedTime + " ms");               
+                                        
+                                        
+                        
+		}
 		
 		public void cienMil() {
 			Engine.database = new DB();
@@ -405,5 +542,3 @@ public class Engine implements Serializable{
 
 
 }
-
-

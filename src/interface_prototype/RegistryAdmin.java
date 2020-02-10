@@ -171,6 +171,7 @@ public class RegistryAdmin extends javax.swing.JFrame {
             try {
                 new Engine().registroA(Integer.parseInt(id),name,username,password);
                 new Engine().end();
+                JOptionPane.showMessageDialog(null, "¡¡Registro Completo!!");
             } catch (Exception e) {
                 System.out.println("Error en registrar." + e);
                 JOptionPane.showMessageDialog(null, "¡¡ERROR al registrar!!");
@@ -198,9 +199,9 @@ public class RegistryAdmin extends javax.swing.JFrame {
     }
     
     public void confirmarCerrar(){
-       int v = JOptionPane.showConfirmDialog(null, "Estas seguro?","Algo",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE);
+       int v = JOptionPane.showConfirmDialog(null, "Estas seguro?","",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE);
        if(v == JOptionPane.YES_OPTION){
-           JOptionPane.showMessageDialog(null, "nlanalnal","nlaalana",JOptionPane.INFORMATION_MESSAGE);
+           JOptionPane.showMessageDialog(null, "Adios","Adios",JOptionPane.INFORMATION_MESSAGE);
            new Administrator().setVisible(true);
            this.dispose();
        }

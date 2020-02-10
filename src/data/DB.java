@@ -11,7 +11,7 @@ public class DB implements Serializable {
 	
 	private ArrayList<Cliente> clientBase;
 	private ArrayList<Admin> adminBase;
-         ArrayList<Producto> inventoryBase;
+        private ArrayList<Producto> inventoryBase;
 
 	DataLoader dl;
 	public DB() {

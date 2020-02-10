@@ -168,6 +168,7 @@ public class Registry extends javax.swing.JFrame {
             try {
                 new Engine().registroI(Integer.parseInt(id),name,username,password);
                 new Engine().end();
+                JOptionPane.showMessageDialog(null, "¡¡Registro Completo!!");
             } catch (Exception e) {
                 System.out.println("Error en registrar cliente." + e);
                 JOptionPane.showMessageDialog(null, "¡¡ERROR al registrar cliente!!, contacte al administrador.");
